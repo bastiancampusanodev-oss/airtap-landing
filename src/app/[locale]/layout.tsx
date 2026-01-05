@@ -7,13 +7,11 @@ export default async function LocaleLayout({
   params
 }: {
   children: React.ReactNode;
-  params: {locale: string};
+  params: Promise<{locale: string}>;
 }) {
-  const {locale} = params;
+  const {locale} = await params;
 
-  // CLAVE: esto hace que next-intl use /en o /es correctamente
   setRequestLocale(locale);
-
   const messages = await getMessages();
 
   return (

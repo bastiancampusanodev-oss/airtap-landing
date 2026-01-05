@@ -7,7 +7,6 @@ import {useLocale, useTranslations} from "next-intl";
 import {motion} from "framer-motion";
 import {ArrowRight, Sparkles, Globe, Video, DollarSign, Users} from "lucide-react";
 
-import SiteHeader from "@/components/SiteHeader";
 
 function classNames(...xs: Array<string | false | undefined>) {
   return xs.filter(Boolean).join(" ");
@@ -21,7 +20,6 @@ export default function Page() {
   return (
     <div className="pt-10 md:pt-14">
       {/* Header global */}
-      <SiteHeader />
 
       {/* HERO */}
       <section className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-10 items-center">

@@ -1,0 +1,66 @@
+{
+  "nav": {
+    "how": "How it works",
+    "pricing": "Pricing",
+    "affiliates": "Affiliates",
+    "contact": "Contact"
+  },
+  "hero": {
+    "title": "Control your phone hands-free.",
+    "subtitle": "AirTap turns face gestures into taps, likes, back and swipe — so you can use apps without touching the screen.",
+    "ctaPrimary": "Join beta",
+    "ctaSecondary": "Watch demo"
+  },
+  "bullets": {
+    "b1": "Fast setup: permissions + go",
+    "b2": "Modes: Sleep / Gestures / Cursor",
+    "b3": "Made for real-world use (TikTok, Reels, browsing)"
+  },
+  "how": {
+    "title": "How it works",
+    "s1t": "Enable",
+    "s1d": "Grant Accessibility + Camera permissions.",
+    "s2t": "Choose mode",
+    "s2d": "Switch modes with a long eye hold (long blink).",
+    "s3t": "Use gestures",
+    "s3d": "Like, Back, Pause and Swipe with simple face gestures."
+  },
+  "demo": {
+    "title": "15-second demo",
+    "hint": "Demo video coming soon (10–15s)."
+  },
+  "pricing": {
+    "title": "Pricing",
+    "note": "Simple plans. Upgrade anytime.",
+    "free": "Free",
+    "pro": "Pro",
+    "annual": "Annual",
+    "freeDesc": "Basic gestures & modes",
+    "proDesc": "Customization + sensitivity options",
+    "annualDesc": "Best value for power users",
+    "perMonth": "/ mo",
+    "perYear": "/ yr",
+    "popular": "Most popular",
+    "cta": "Get early access",
+    "backHome": "Back to home"
+  },
+  "aff": {
+    "title": "Affiliate program",
+    "subtitle": "Influencer? Partner with AirTap. Send us your details and we’ll contact you.",
+    "name": "Name",
+    "email": "Email",
+    "handle": "Social handle / link",
+    "audience": "Audience size (optional)",
+    "send": "Send request",
+    "note": "This form opens your email client (no backend yet)."
+  },
+  "contact": {
+    "title": "Contact",
+    "subtitle": "Questions, partnerships or press — reach out anytime.",
+    "whatsapp": "WhatsApp",
+    "email": "Email"
+  },
+  "footer": {
+    "rights": "© {year} AirTap. All rights reserved."
+  }
+}

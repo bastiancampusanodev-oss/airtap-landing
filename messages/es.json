@@ -1,0 +1,66 @@
+{
+  "nav": {
+    "how": "Cómo funciona",
+    "pricing": "Precios",
+    "affiliates": "Afiliados",
+    "contact": "Contacto"
+  },
+  "hero": {
+    "title": "Controla tu teléfono sin tocarlo.",
+    "subtitle": "AirTap convierte gestos faciales en tap, like, back y swipe — para usar tus apps sin manos.",
+    "ctaPrimary": "Unirme a la beta",
+    "ctaSecondary": "Ver demo"
+  },
+  "bullets": {
+    "b1": "Setup rápido: permisos y listo",
+    "b2": "Modos: Sleep / Gestos / Cursor",
+    "b3": "Hecho para uso real (TikTok, Reels, navegación)"
+  },
+  "how": {
+    "title": "Cómo funciona",
+    "s1t": "Activar",
+    "s1d": "Otorga permisos de Accesibilidad + Cámara.",
+    "s2t": "Elegir modo",
+    "s2d": "Cambia de modo con ojos largos (parpadeo largo).",
+    "s3t": "Usar gestos",
+    "s3d": "Like, Back, Pausa y Swipe con gestos simples."
+  },
+  "demo": {
+    "title": "Demo de 15 segundos",
+    "hint": "Video demo pronto (10–15s)."
+  },
+  "pricing": {
+    "title": "Precios",
+    "note": "Planes simples. Puedes cambiar cuando quieras.",
+    "free": "Gratis",
+    "pro": "Pro",
+    "annual": "Anual",
+    "freeDesc": "Gestos y modos básicos",
+    "proDesc": "Personalización + sensibilidad",
+    "annualDesc": "Mejor valor para power users",
+    "perMonth": "/ mes",
+    "perYear": "/ año",
+    "popular": "Más elegido",
+    "cta": "Acceso temprano",
+    "backHome": "Volver al inicio"
+  },
+  "aff": {
+    "title": "Programa de afiliados",
+    "subtitle": "¿Influencer? Trabajemos juntos. Envíanos tus datos y te contactamos.",
+    "name": "Nombre",
+    "email": "Correo",
+    "handle": "Usuario / link",
+    "audience": "Tamaño audiencia (opcional)",
+    "send": "Enviar solicitud",
+    "note": "Este formulario abre tu correo (sin backend todavía)."
+  },
+  "contact": {
+    "title": "Contacto",
+    "subtitle": "Dudas, alianzas o prensa — escríbeme cuando quieras.",
+    "whatsapp": "WhatsApp",
+    "email": "Correo"
+  },
+  "footer": {
+    "rights": "© {year} AirTap. Todos los derechos reservados."
+  }
+}

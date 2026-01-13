@@ -138,7 +138,7 @@ export default function Page() {
       <div className="w-full max-w-[420px] aspect-[9/16] rounded-2xl overflow-hidden bg-black/40 ring-1 ring-white/10">
         <video
           className="w-full h-full object-cover"
-          src="/airtap_demo_pip_web.mp4"
+          src="/airtap_demo_pip.mp4"
           autoPlay
           muted
           loop

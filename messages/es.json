@@ -16,18 +16,27 @@
     "b2": "Modos: Sleep / Gestos / Cursor",
     "b3": "Hecho para uso real (TikTok, Reels, navegación)"
   },
-  "how": {
-    "title": "Cómo funciona",
-    "s1t": "Activar",
-    "s1d": "Otorga permisos de Accesibilidad + Cámara.",
-    "s2t": "Elegir modo",
-    "s2d": "Cambia de modo con ojos largos (parpadeo largo).",
-    "s3t": "Usar gestos",
-    "s3d": "Like, Back, Pausa y Swipe con gestos simples."
-  },
+"how": {
+  "cheatsheetTitle": "Guía rápida de gestos"
+},
+"gestures": {
+  "like": "Guiño derecho → Like",
+  "likeDesc": "Haz un guiño con el ojo derecho para dar like.",
+  "back": "Guiño izquierdo → Atrás",
+  "backDesc": "Haz un guiño con el ojo izquierdo para volver.",
+  "swipe": "Giro de cabeza (yaw) → Swipe",
+  "swipeDesc": "Gira levemente la cabeza para hacer swipe.",
+  "pause": "Asentir sostenido → Pausa/Play",
+  "pauseDesc": "Mantén el gesto de asentir para pausar o reanudar.",
+  "lock": "Doble asentir (Home) → Bloquear/Desbloquear",
+  "lockDesc": "En la pantalla de inicio, doble asentir para bloquear/desbloquear.",
+  "volume": "Inclinación de cabeza → Volumen",
+  "volumeDesc": "Inclina la cabeza para ajustar el volumen."
+}
+,
   "demo": {
-    "title": "Demo de 15 segundos",
-    "hint": "Video demo pronto (10–15s)."
+  "title": "Demo",
+  "hint": "Grabación real. Navegación hands-free con gestos de cabeza y cursor facial."
   },
   "pricing": {
     "title": "Precios",

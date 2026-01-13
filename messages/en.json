@@ -16,18 +16,27 @@
     "b2": "Modes: Sleep / Gestures / Cursor",
     "b3": "Made for real-world use (TikTok, Reels, browsing)"
   },
-  "how": {
-    "title": "How it works",
-    "s1t": "Enable",
-    "s1d": "Grant Accessibility + Camera permissions.",
-    "s2t": "Choose mode",
-    "s2d": "Switch modes with a long eye hold (long blink).",
-    "s3t": "Use gestures",
-    "s3d": "Like, Back, Pause and Swipe with simple face gestures."
-  },
+"how": {
+  "cheatsheetTitle": "Gesture cheat sheet"
+},
+"gestures": {
+  "like": "Right wink → Like",
+  "likeDesc": "Wink with your right eye to like.",
+  "back": "Left wink → Back",
+  "backDesc": "Wink with your left eye to go back.",
+  "swipe": "Head turn (yaw) → Swipe",
+  "swipeDesc": "Turn your head slightly to swipe.",
+  "pause": "Hold nod → Pause/Play",
+  "pauseDesc": "Hold a nod to pause or play.",
+  "lock": "Double nod (Home) → Lock/Unlock",
+  "lockDesc": "On the Home screen, double nod to lock/unlock.",
+  "volume": "Head tilt → Volume",
+  "volumeDesc": "Tilt your head to adjust volume."
+}
+,
   "demo": {
-    "title": "15-second demo",
-    "hint": "Demo video coming soon (10–15s)."
+  "title": "Demo",
+  "hint": "Real footage. Hands-free navigation with head gestures and face cursor."
   },
   "pricing": {
     "title": "Pricing",

@@ -117,15 +117,32 @@ export default function Page() {
         </div>
       </section>
 
-      {/* HOW (Home section) */}
-      <section id="how" className="mt-16 md:mt-24">
-        <SectionTitle icon={<Sparkles className="h-5 w-5 text-cyan-300" />} title={t("how.title")} />
-        <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4">
-          <Card title={t("how.s1t")} desc={t("how.s1d")} />
-          <Card title={t("how.s2t")} desc={t("how.s2d")} />
-          <Card title={t("how.s3t")} desc={t("how.s3d")} />
-        </div>
-      </section>
+  {/* HOW (Home section) */}
+<section id="how" className="mt-16 md:mt-24">
+  <SectionTitle icon={<Sparkles className="h-5 w-5 text-cyan-300" />} title={t("how.title")} />
+
+  {/* Macro: 3 pasos (se queda) */}
+  <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4">
+    <Card title={t("how.s1t")} desc={t("how.s1d")} />
+    <Card title={t("how.s2t")} desc={t("how.s2d")} />
+    <Card title={t("how.s3t")} desc={t("how.s3d")} />
+  </div>
+
+  {/* Micro: guía rápida de gestos */}
+  <div className="mt-8">
+    <div className="text-sm font-semibold text-white/70">{t("how.cheatsheetTitle")}</div>
+
+    <div className="mt-3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      <GestureCard icon="❤️" title={t("gestures.like")} desc={t("gestures.likeDesc")} />
+      <GestureCard icon="⬅️" title={t("gestures.back")} desc={t("gestures.backDesc")} />
+      <GestureCard icon="↔️" title={t("gestures.swipe")} desc={t("gestures.swipeDesc")} />
+      <GestureCard icon="⏯️" title={t("gestures.pause")} desc={t("gestures.pauseDesc")} />
+      <GestureCard icon="🔒" title={t("gestures.lock")} desc={t("gestures.lockDesc")} />
+      <GestureCard icon="🔊" title={t("gestures.volume")} desc={t("gestures.volumeDesc")} />
+    </div>
+  </div>
+</section>
+
 
       {/* DEMO (Home section) */}
 {/* DEMO (Home section) */}
@@ -188,3 +205,17 @@ function Card({title, desc}: {title: string; desc: string}) {
     </div>
   );
 }
+function GestureCard({ icon, title, desc }: { icon: string; title: string; desc: string }) {
+  return (
+    <div className="rounded-3xl bg-white/5 p-6 ring-1 ring-white/10">
+      <div className="flex items-center gap-3">
+        <div className="h-10 w-10 rounded-2xl bg-white/5 ring-1 ring-white/10 flex items-center justify-center text-lg">
+          {icon}
+        </div>
+        <h3 className="text-base font-semibold">{title}</h3>
+      </div>
+      <p className="mt-2 text-sm text-white/70">{desc}</p>
+    </div>
+  );
+}
+

@@ -17,6 +17,13 @@
     "b3": "Made for real-world use (TikTok, Reels, browsing)"
   },
 "how": {
+    "title": "How it works",
+  "s1t": "Enable",
+  "s1d": "Grant Accessibility + Camera permissions.",
+  "s2t": "Choose mode",
+  "s2d": "Close your eyes for 2 seconds to switch modes.",
+  "s3t": "Use gestures",
+  "s3d": "Like, Back, Pause and Swipe with simple face gestures.",
   "cheatsheetTitle": "Gesture cheat sheet"
 },
 "gestures": {

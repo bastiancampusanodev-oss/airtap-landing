@@ -17,7 +17,15 @@
     "b3": "Hecho para uso real (TikTok, Reels, navegación)"
   },
 "how": {
+  "title": "Cómo funciona",
+  "s1t": "Activar",
+  "s1d": "Otorga permisos de Accesibilidad + Cámara.",
+  "s2t": "Elegir modo",
+  "s2d": "Cierra los ojos 2 segundos para cambiar de modo.",
+  "s3t": "Usar gestos",
+  "s3d": "Like, Atrás, Pausa y Swipe con gestos simples.",
   "cheatsheetTitle": "Guía rápida de gestos"
+
 },
 "gestures": {
   "like": "Guiño derecho → Like",

@@ -136,16 +136,17 @@ export default function Page() {
   <div className="mt-6 rounded-3xl overflow-hidden ring-1 ring-white/10 bg-white/5">
     <div className="p-4 md:p-6 flex justify-center">
       <div className="w-full max-w-[420px] aspect-[9/16] rounded-2xl overflow-hidden bg-black/40 ring-1 ring-white/10">
-        <video
-          className="w-full h-full object-cover"
-          src="/airtap_demo_pip.mp4"
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="metadata"
-          controls
-        />
+    <video
+  className="w-full h-full object-contain"
+  src="/airtap_demo_pip.mp4"
+  autoPlay
+  muted
+  loop
+  playsInline
+  preload="metadata"
+  controls
+/>
+
       </div>
     </div>
   </div>

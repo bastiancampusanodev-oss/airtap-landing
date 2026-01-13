@@ -128,16 +128,29 @@ export default function Page() {
       </section>
 
       {/* DEMO (Home section) */}
-      <section id="demo" className="mt-16 md:mt-24">
-        <SectionTitle icon={<Video className="h-5 w-5 text-cyan-300" />} title={t("demo.title")} />
-        <p className="mt-3 text-sm text-white/60">{t("demo.hint")}</p>
+{/* DEMO (Home section) */}
+<section id="demo" className="mt-16 md:mt-24">
+  <SectionTitle icon={<Video className="h-5 w-5 text-cyan-300" />} title={t("demo.title")} />
+  <p className="mt-3 text-sm text-white/60">{t("demo.hint")}</p>
 
-        <div className="mt-6 rounded-3xl overflow-hidden ring-1 ring-white/10 bg-white/5">
-          <div className="aspect-video w-full flex items-center justify-center bg-black/30">
-            <span className="text-white/60 text-sm">Demo video coming soon (10–15s)</span>
-          </div>
-        </div>
-      </section>
+  <div className="mt-6 rounded-3xl overflow-hidden ring-1 ring-white/10 bg-white/5">
+    <div className="p-4 md:p-6 flex justify-center">
+      <div className="w-full max-w-[420px] aspect-[9/16] rounded-2xl overflow-hidden bg-black/40 ring-1 ring-white/10">
+        <video
+          className="w-full h-full object-cover"
+          src="/airtap_demo_pip_web.mp4"
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="metadata"
+          controls
+        />
+      </div>
+    </div>
+  </div>
+</section>
+
 
       <footer className="mt-20 border-t border-white/10 pt-8 text-sm text-white/60">
         {t("footer.rights", {year})}

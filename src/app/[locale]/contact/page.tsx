@@ -4,7 +4,7 @@ import {useTranslations} from "next-intl";
 import {Mail, MessageCircle} from "lucide-react";
 
 const WHATSAPP_NUMBER_E164 = "56965351547";
-const CONTACT_EMAIL = "bastiancampusanodev@gmail.com";
+const CONTACT_EMAIL = "admin@airtapapp.com";
 
 function SectionTitle({icon, title}: {icon: React.ReactNode; title: string}) {
   return (

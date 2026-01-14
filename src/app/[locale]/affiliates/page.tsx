@@ -1,9 +1,8 @@
 "use client";
 
+import {useState} from "react";
 import {useTranslations} from "next-intl";
 import {Users, ArrowRight} from "lucide-react";
-
-const CONTACT_EMAIL = "bastiancampusanodev@gmail.com";
 
 function SectionTitle({icon, title}: {icon: React.ReactNode; title: string}) {
   return (
@@ -43,16 +42,11 @@ function Field({
   );
 }
 
+type Status = "idle" | "sending" | "sent" | "error";
+
 export default function AffiliatesPage() {
   const t = useTranslations();
-
-  const affiliateMailto = (name: string, email: string, handle: string, audience: string) => {
-    const subject = encodeURIComponent("AirTap — Affiliate program request");
-    const body = encodeURIComponent(
-      `Hi AirTap,\n\nI'd like to join the affiliate program.\n\nName: ${name}\nEmail: ${email}\nHandle/Link: ${handle}\nAudience: ${audience}\n\nThanks!`
-    );
-    return `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`;
-  };
+  const [status, setStatus] = useState<Status>("idle");
 
   return (
     <main className="relative mx-auto max-w-6xl px-6 pb-20 pt-10">
@@ -61,15 +55,32 @@ export default function AffiliatesPage() {
 
       <form
         className="mt-8 rounded-3xl bg-white/5 p-6 ring-1 ring-white/10 max-w-2xl"
-        onSubmit={(e) => {
+        onSubmit={async (e) => {
           e.preventDefault();
+          setStatus("sending");
+
           const form = e.currentTarget;
           const data = new FormData(form);
-          const name = String(data.get("name") || "");
-          const email = String(data.get("email") || "");
-          const handle = String(data.get("handle") || "");
-          const audience = String(data.get("audience") || "");
-          window.location.href = affiliateMailto(name, email, handle, audience);
+
+          const name = String(data.get("name") || "").trim();
+          const email = String(data.get("email") || "").trim();
+          const handle = String(data.get("handle") || "").trim();
+          const audience = String(data.get("audience") || "").trim();
+
+          try {
+            const res = await fetch("/api/affiliate", {
+              method: "POST",
+              headers: {"Content-Type": "application/json"},
+              body: JSON.stringify({name, email, handle, audience})
+            });
+
+            if (!res.ok) throw new Error("Request failed");
+
+            setStatus("sent");
+            form.reset();
+          } catch {
+            setStatus("error");
+          }
         }}
       >
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -85,14 +96,26 @@ export default function AffiliatesPage() {
 
         <button
           type="submit"
-          className="mt-5 inline-flex items-center gap-2 rounded-2xl bg-cyan-400 px-5 py-3 text-sm font-semibold text-black hover:brightness-110"
+          disabled={status === "sending"}
+          className="mt-5 inline-flex items-center gap-2 rounded-2xl bg-cyan-400 px-5 py-3 text-sm font-semibold text-black hover:brightness-110 disabled:opacity-60 disabled:cursor-not-allowed"
         >
-          {t("aff.send")} <ArrowRight className="h-4 w-4" />
+          {status === "sending" ? "Sending..." : status === "sent" ? "Sent!" : t("aff.send")}{" "}
+          <ArrowRight className="h-4 w-4" />
         </button>
 
-        <p className="mt-3 text-xs text-white/50">
-          {t("aff.note")}
-        </p>
+        <p className="mt-3 text-xs text-white/50">{t("aff.note")}</p>
+
+        {status === "sent" && (
+          <p className="mt-3 text-sm text-cyan-200">
+            Thanks! We got your request and we’ll contact you soon.
+          </p>
+        )}
+
+        {status === "error" && (
+          <p className="mt-3 text-sm text-red-300">
+            Something went wrong. Please try again in a moment.
+          </p>
+        )}
       </form>
     </main>
   );

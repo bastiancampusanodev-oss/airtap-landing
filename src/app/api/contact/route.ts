@@ -4,49 +4,55 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(req: Request) {
   try {
-    const { name, email, message, topic } = await req.json();
+    const { name, email, topic, message } = await req.json();
 
-    const n = String(name || "").trim();
-    const e = String(email || "").trim();
-    const m = String(message || "").trim();
-    const t = String(topic || "General").trim();
-
-    if (!n || !e || !m) {
+    // Basic validation
+    if (!name || !email || !message) {
       return Response.json({ ok: false, error: "Missing required fields" }, { status: 400 });
     }
 
-    const subject = `AirTap contact — ${t} — ${n}`;
+    const safeName = String(name).trim();
+    const safeEmail = String(email).trim();
+    const safeTopic = String(topic || "").trim();
+    const safeMessage = String(message).trim();
+
+    if (!safeName || !safeEmail || !safeMessage) {
+      return Response.json({ ok: false, error: "Missing required fields" }, { status: 400 });
+    }
+
+    const subject = `AirTap contact — ${safeName}${safeTopic ? ` (${safeTopic})` : ""}`;
 
     const html = `
-      <div style="font-family:ui-sans-serif,system-ui;line-height:1.45">
+      <div style="font-family:ui-sans-serif,system-ui;line-height:1.5">
         <h2>New contact message</h2>
-        <p><b>Topic:</b> ${escapeHtml(t)}</p>
-        <p><b>Name:</b> ${escapeHtml(n)}</p>
-        <p><b>Email:</b> ${escapeHtml(e)}</p>
-        <p><b>Message:</b></p>
-        <div style="white-space:pre-wrap;border:1px solid #eee;border-radius:12px;padding:12px">
-          ${escapeHtml(m)}
-        </div>
+        <p><b>Name:</b> ${escapeHtml(safeName)}</p>
+        <p><b>Email:</b> ${escapeHtml(safeEmail)}</p>
+        <p><b>Topic:</b> ${escapeHtml(safeTopic || "-")}</p>
+        <hr/>
+        <p style="white-space:pre-wrap">${escapeHtml(safeMessage)}</p>
         <hr/>
         <p style="color:#666">Sent from airtapapp.com</p>
       </div>
     `;
 
-    const { error } = await resend.emails.send({
-      // ✅ usa el dominio verificado (airtapapp.com)
-      from: "AirTap <hello@airtapapp.com>",
+    // ✅ NOTE:
+    // - "from" MUST be a valid sender on your verified domain in Resend (e.g. contact@airtapapp.com)
+    // - "to" can be admin@... and you can also add more recipients if you want
+    const result = await resend.emails.send({
+      from: "AirTap <contact@airtapapp.com>",
       to: ["admin@airtapapp.com"],
-      replyTo: e,
+      replyTo: safeEmail,
       subject,
       html,
     });
 
-    if (error) {
-      return Response.json({ ok: false, error }, { status: 500 });
+    // Resend returns { data, error }
+    if (result.error) {
+      return Response.json({ ok: false, error: result.error }, { status: 500 });
     }
 
-    return Response.json({ ok: true });
-  } catch (err) {
+    return Response.json({ ok: true }, { status: 200 });
+  } catch (e) {
     return Response.json({ ok: false, error: "Server error" }, { status: 500 });
   }
 }

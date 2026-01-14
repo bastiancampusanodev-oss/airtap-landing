@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import { useTranslations } from "next-intl";
 import { Mail, MessageCircle, ArrowRight } from "lucide-react";
 
@@ -21,12 +21,14 @@ function Field({
   placeholder,
   required,
   type = "text",
+  autoComplete,
 }: {
   name: string;
   label: string;
   placeholder?: string;
   required?: boolean;
   type?: string;
+  autoComplete?: string;
 }) {
   return (
     <label className="block">
@@ -37,6 +39,7 @@ function Field({
         placeholder={placeholder}
         required={required}
         type={type}
+        autoComplete={autoComplete}
       />
     </label>
   );
@@ -48,18 +51,25 @@ export default function ContactPage() {
   const t = useTranslations();
   const [status, setStatus] = useState<Status>("idle");
 
-  // ⚠️ Pon tu WhatsApp acá si quieres (ej +569XXXXXXXX)
-  const WHATSAPP_NUMBER = ""; // ej: "56965351547"
-  const whatsappHref = WHATSAPP_NUMBER
-    ? `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent("Hi AirTap! I have a question 👋")}`
-    : "#";
+  // ✅ Pon tu WhatsApp acá (sin +, solo dígitos). Ej: "56965351547"
+  const WHATSAPP_NUMBER = "";
+
+  const whatsappHref = useMemo(() => {
+    if (!WHATSAPP_NUMBER) return "";
+    return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
+      t("contact.whatsappPrefill")
+    )}`;
+  }, [WHATSAPP_NUMBER, t]);
 
   return (
     <main className="relative mx-auto max-w-6xl px-6 pb-20 pt-12">
-      <SectionTitle icon={<Mail className="h-6 w-6 text-cyan-300" />} title={t("contact.title")} />
+      <SectionTitle
+        icon={<Mail className="h-6 w-6 text-cyan-300" />}
+        title={t("contact.title")}
+      />
 
       <p className="mt-4 text-base md:text-lg text-white/70 max-w-3xl">
-        {t("contact.subtitle")}
+        {t("contact.subtitleLong")}
       </p>
 
       <div className="mt-10 grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -68,6 +78,8 @@ export default function ContactPage() {
           className="rounded-3xl bg-white/5 p-7 md:p-8 ring-1 ring-white/10"
           onSubmit={async (e) => {
             e.preventDefault();
+            if (status === "sending") return;
+
             setStatus("sending");
 
             const form = e.currentTarget;
@@ -95,10 +107,29 @@ export default function ContactPage() {
           }}
         >
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <Field name="name" label={t("contact.name")} placeholder="Jane Doe" required />
-            <Field name="email" label={t("contact.email")} placeholder="jane@email.com" required type="email" />
+            <Field
+              name="name"
+              label={t("contact.name")}
+              placeholder="Jane Doe"
+              required
+              autoComplete="name"
+            />
+            <Field
+              name="email"
+              label={t("contact.email")}
+              placeholder="jane@email.com"
+              required
+              type="email"
+              autoComplete="email"
+            />
+
             <div className="md:col-span-2">
-              <Field name="topic" label={t("contact.topic")} placeholder={t("contact.topicPlaceholder")} />
+              <Field
+                name="topic"
+                label={t("contact.topic")}
+                placeholder={t("contact.topicPlaceholder")}
+                autoComplete="off"
+              />
             </div>
 
             <label className="md:col-span-2 block">
@@ -117,7 +148,11 @@ export default function ContactPage() {
             disabled={status === "sending"}
             className="mt-6 inline-flex items-center gap-2 rounded-2xl bg-cyan-400 px-6 py-3 text-sm font-semibold text-black hover:brightness-110 disabled:opacity-60 disabled:cursor-not-allowed"
           >
-            {status === "sending" ? t("contact.sending") : status === "sent" ? t("contact.sent") : t("contact.send")}
+            {status === "sending"
+              ? t("contact.sending")
+              : status === "sent"
+              ? t("contact.sent")
+              : t("contact.send")}
             <ArrowRight className="h-4 w-4" />
           </button>
 
@@ -143,19 +178,22 @@ export default function ContactPage() {
           <p className="mt-3 text-white/70">{t("contact.quickDesc")}</p>
 
           <div className="mt-6 flex flex-wrap gap-3">
-            <a
-              href={whatsappHref}
-              className="inline-flex items-center gap-2 rounded-2xl bg-white/5 px-6 py-3 text-sm font-semibold text-white ring-1 ring-white/10 hover:bg-white/10"
-            >
-              WhatsApp <ArrowRight className="h-4 w-4" />
-            </a>
+            {!!WHATSAPP_NUMBER && (
+              <a
+                href={whatsappHref}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-2 rounded-2xl bg-white/5 px-6 py-3 text-sm font-semibold text-white ring-1 ring-white/10 hover:bg-white/10"
+              >
+                {t("contact.whatsapp")} <ArrowRight className="h-4 w-4" />
+              </a>
+            )}
 
-            {/* Por si quieres mantener “email directo”, pero ya NO es necesario */}
             <a
               href="mailto:admin@airtapapp.com"
               className="inline-flex items-center gap-2 rounded-2xl bg-white/5 px-6 py-3 text-sm font-semibold text-white ring-1 ring-white/10 hover:bg-white/10"
             >
-              Email <ArrowRight className="h-4 w-4" />
+              {t("contact.email")} <ArrowRight className="h-4 w-4" />
             </a>
           </div>
 

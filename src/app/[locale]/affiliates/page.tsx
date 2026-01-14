@@ -47,6 +47,7 @@ type Status = "idle" | "sending" | "sent" | "error";
 export default function AffiliatesPage() {
   const t = useTranslations();
   const [status, setStatus] = useState<Status>("idle");
+  const [errorMsg, setErrorMsg] = useState<string>("");
 
   return (
     <main className="relative mx-auto max-w-6xl px-6 pb-20 pt-10">
@@ -58,6 +59,7 @@ export default function AffiliatesPage() {
         onSubmit={async (e) => {
           e.preventDefault();
           setStatus("sending");
+          setErrorMsg("");
 
           const form = e.currentTarget;
           const data = new FormData(form);
@@ -74,12 +76,23 @@ export default function AffiliatesPage() {
               body: JSON.stringify({name, email, handle, audience})
             });
 
-            if (!res.ok) throw new Error("Request failed");
+            // Intenta leer JSON siempre (aunque sea error)
+            const payload = await res.json().catch(() => ({} as any));
+
+            if (!res.ok || payload?.ok === false) {
+              const msg =
+                payload?.error?.message ||
+                payload?.error ||
+                payload?.message ||
+                "Request failed. Please try again.";
+              throw new Error(msg);
+            }
 
             setStatus("sent");
             form.reset();
-          } catch {
+          } catch (err: any) {
             setStatus("error");
+            setErrorMsg(err?.message || "Something went wrong. Please try again.");
           }
         }}
       >
@@ -113,7 +126,7 @@ export default function AffiliatesPage() {
 
         {status === "error" && (
           <p className="mt-3 text-sm text-red-300">
-            Something went wrong. Please try again in a moment.
+            {errorMsg || "Something went wrong. Please try again in a moment."}
           </p>
         )}
       </form>

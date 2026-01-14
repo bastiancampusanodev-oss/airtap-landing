@@ -25,8 +25,8 @@ export async function POST(req: Request) {
     `;
 
   const { data, error } = await resend.emails.send({
-  from: "AirTap <affiliate@send.airtapapp.com>",
-  to: ["admin@airtapapp.com"],
+from: "AirTap <affiliate@airtapapp.com>",
+to: ["admin@airtapapp.com"],
   replyTo: String(email),
   subject,
   html,

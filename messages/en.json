@@ -70,12 +70,26 @@
     "send": "Send request",
     "note": "This form opens your email client (no backend yet)."
   },
-  "contact": {
-    "title": "Contact",
-    "subtitle": "Questions, partnerships or press — reach out anytime.",
-    "whatsapp": "WhatsApp",
-    "email": "Email"
-  },
+ "contact": {
+  "title": "Contact",
+  "subtitle": "Reach out anytime — we’ll be happy to answer questions, help you with the app, receive feedback, suggestions, collaborations, or anything you need.",
+  "name": "Name",
+  "email": "Email",
+  "topic": "Topic (optional)",
+  "topicPlaceholder": "Support, feedback, press, partnership...",
+  "message": "Message",
+  "messagePlaceholder": "Tell us what you need. The more details, the better.",
+  "send": "Send message",
+  "sending": "Sending...",
+  "sent": "Sent!",
+  "success": "Thanks! We received your message and we’ll get back to you soon.",
+  "error": "Something went wrong. Please try again in a moment.",
+  "note": "We usually reply within 24–48 hours.",
+  "quickTitle": "Quick options",
+  "quickDesc": "Prefer something faster? Use WhatsApp or email us directly.",
+  "emailHint": "This inbox receives all website messages.",
+  "whatsapp": "WhatsApp"
+},
   "footer": {
     "rights": "© {year} AirTap. All rights reserved."
   }

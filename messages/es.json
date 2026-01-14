@@ -71,12 +71,27 @@
     "send": "Enviar solicitud",
     "note": "Este formulario abre tu correo (sin backend todavía)."
   },
-  "contact": {
-    "title": "Contacto",
-    "subtitle": "Dudas, alianzas o prensa — escríbeme cuando quieras.",
-    "whatsapp": "WhatsApp",
-    "email": "Correo"
-  },
+ "contact": {
+  "title": "Contacto",
+  "subtitle": "Ponte en contacto con nosotros cuando quieras: felices de resolver dudas, ayudarte con la app y recibir críticas, comentarios, aportes o colaboraciones.",
+  "name": "Nombre",
+  "email": "Correo",
+  "topic": "Tema (opcional)",
+  "topicPlaceholder": "Soporte, feedback, prensa, colaboración...",
+  "message": "Mensaje",
+  "messagePlaceholder": "Cuéntanos qué necesitas. Mientras más detalle, mejor.",
+  "send": "Enviar mensaje",
+  "sending": "Enviando...",
+  "sent": "¡Enviado!",
+  "success": "¡Gracias! Recibimos tu mensaje y te responderemos pronto.",
+  "error": "Algo salió mal. Intenta de nuevo en un momento.",
+  "note": "Normalmente respondemos dentro de 24–48 horas.",
+  "quickTitle": "Opciones rápidas",
+  "quickDesc": "¿Prefieres algo más rápido? Escríbenos por WhatsApp o por correo.",
+  "emailHint": "Este buzón recibe todos los mensajes del sitio.",
+  "whatsapp": "WhatsApp"
+}
+,
   "footer": {
     "rights": "© {year} AirTap. Todos los derechos reservados."
   }

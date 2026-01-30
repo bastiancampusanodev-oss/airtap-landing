@@ -1,15 +1,16 @@
 import SiteHeader from "@/components/SiteHeader";
-import {NextIntlClientProvider} from "next-intl";
-import {getMessages, setRequestLocale} from "next-intl/server";
+import VercelAnalytics from "@/components/VercelAnalytics";
+import { NextIntlClientProvider } from "next-intl";
+import { getMessages, setRequestLocale } from "next-intl/server";
 
 export default async function LocaleLayout({
   children,
-  params
+  params,
 }: {
   children: React.ReactNode;
-  params: Promise<{locale: string}>;
+  params: Promise<{ locale: string }>;
 }) {
-  const {locale} = await params;
+  const { locale } = await params;
 
   setRequestLocale(locale);
   const messages = await getMessages();
@@ -25,9 +26,10 @@ export default async function LocaleLayout({
 
         <SiteHeader />
 
-        <main className="relative mx-auto max-w-6xl px-6 pb-20">
-          {children}
-        </main>
+        <main className="relative mx-auto max-w-6xl px-6 pb-20">{children}</main>
+
+        {/* Vercel Web Analytics */}
+        <VercelAnalytics />
       </div>
     </NextIntlClientProvider>
   );

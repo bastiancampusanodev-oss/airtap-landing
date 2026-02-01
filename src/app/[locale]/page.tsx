@@ -2,14 +2,29 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import {useMemo} from "react";
-import {useLocale, useTranslations} from "next-intl";
-import {motion} from "framer-motion";
-import {ArrowRight, Sparkles, Globe, Video, DollarSign, Users} from "lucide-react";
-
+import { useMemo } from "react";
+import { useLocale, useTranslations } from "next-intl";
+import { motion } from "framer-motion";
+import { ArrowRight, Sparkles, Globe, Video, DollarSign, Users } from "lucide-react";
 
 function classNames(...xs: Array<string | false | undefined>) {
   return xs.filter(Boolean).join(" ");
+}
+
+// ✅ Play Store URL + UTMs (medición simple)
+const PLAY_URL =
+  "https://play.google.com/store/apps/details?id=com.airtap.app&utm_source=website&utm_medium=cta&utm_campaign=softlaunch";
+
+// ✅ Google Play icon (inline SVG)
+function GooglePlayIcon({ className = "h-4 w-4" }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} aria-hidden="true">
+      <path fill="currentColor" d="M3.6 2.2c-.4.3-.6.8-.6 1.5v16.6c0 .7.2 1.2.6 1.5l10.2-10.3L3.6 2.2z" />
+      <path fill="currentColor" d="M14.7 12l2.6-2.6L6.8 3.3l7.9 8.7z" opacity=".85" />
+      <path fill="currentColor" d="M20.4 10.7c.8.4 1.3.9 1.3 1.3s-.5.9-1.3 1.3l-2.8 1.6-2.9-3.0 2.9-3.0 2.8 1.8z" />
+      <path fill="currentColor" d="M6.8 20.7l10.5-6.1L14.7 12l-7.9 8.7z" opacity=".85" />
+    </svg>
+  );
 }
 
 export default function Page() {
@@ -19,45 +34,57 @@ export default function Page() {
 
   return (
     <div className="pt-10 md:pt-14">
-      {/* Header global */}
-
       {/* HERO */}
       <section className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
         <div>
           <motion.h1
-            initial={{opacity: 0, y: 10}}
-            animate={{opacity: 1, y: 0}}
-            transition={{duration: 0.5}}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
             className="text-4xl md:text-6xl font-semibold leading-[1.05] tracking-tight"
           >
             {t("hero.title")}
           </motion.h1>
 
           <motion.p
-            initial={{opacity: 0, y: 10}}
-            animate={{opacity: 1, y: 0}}
-            transition={{duration: 0.5, delay: 0.1}}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
             className="mt-5 max-w-2xl text-base md:text-lg text-white/75"
           >
             {t("hero.subtitle")}
           </motion.p>
 
+          {/* ✅ CTAs */}
           <div className="mt-8 flex flex-col sm:flex-row gap-3">
-            {/* Join beta -> página Affiliates */}
-            <Link
-              href={`/${locale}/affiliates`}
+            {/* Primary CTA -> Google Play */}
+            <a
+              href={PLAY_URL}
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-2 rounded-2xl bg-cyan-400 px-5 py-3 text-sm font-semibold text-black hover:brightness-110"
+              aria-label="Get it on Google Play"
             >
-              {t("hero.ctaPrimary")} <ArrowRight className="h-4 w-4" />
-            </Link>
+              <GooglePlayIcon className="h-4 w-4" />
+              Get it on Google Play
+              <ArrowRight className="h-4 w-4" />
+            </a>
 
-            {/* Watch demo -> sección del home */}
+            {/* Secondary -> Demo */}
             <a
               href="#demo"
               className="inline-flex items-center justify-center gap-2 rounded-2xl bg-white/5 px-5 py-3 text-sm font-semibold text-white ring-1 ring-white/10 hover:bg-white/8"
             >
-              <Video className="h-4 w-4" /> {t("hero.ctaSecondary")}
+              <Video className="h-4 w-4" /> Watch demo
             </a>
+
+            {/* Tertiary -> Affiliates */}
+            <Link
+              href={`/${locale}/affiliates`}
+              className="inline-flex items-center justify-center gap-2 rounded-2xl bg-white/5 px-5 py-3 text-sm font-semibold text-white ring-1 ring-white/10 hover:bg-white/8"
+            >
+              <Users className="h-4 w-4" /> Become an affiliate
+            </Link>
           </div>
 
           <div className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-3">
@@ -81,6 +108,19 @@ export default function Page() {
             >
               <Users className="h-4 w-4 text-cyan-300" /> {t("nav.affiliates")}
             </Link>
+
+            {/* ✅ Quick link to Play Store */}
+            <a
+              href={PLAY_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-xl bg-white/5 px-4 py-2 ring-1 ring-white/10 hover:bg-white/10"
+            >
+              <span className="text-cyan-300">
+                <GooglePlayIcon className="h-4 w-4" />
+              </span>
+              Google Play
+            </a>
           </div>
         </div>
 
@@ -117,67 +157,63 @@ export default function Page() {
         </div>
       </section>
 
-  {/* HOW (Home section) */}
-<section id="how" className="mt-16 md:mt-24">
-  <SectionTitle icon={<Sparkles className="h-5 w-5 text-cyan-300" />} title={t("how.title")} />
+      {/* HOW (Home section) */}
+      <section id="how" className="mt-16 md:mt-24">
+        <SectionTitle icon={<Sparkles className="h-5 w-5 text-cyan-300" />} title={t("how.title")} />
 
-  {/* Macro: 3 pasos (se queda) */}
-  <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4">
-    <Card title={t("how.s1t")} desc={t("how.s1d")} />
-    <Card title={t("how.s2t")} desc={t("how.s2d")} />
-    <Card title={t("how.s3t")} desc={t("how.s3d")} />
-  </div>
+        {/* Macro: 3 pasos (se queda) */}
+        <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4">
+          <Card title={t("how.s1t")} desc={t("how.s1d")} />
+          <Card title={t("how.s2t")} desc={t("how.s2d")} />
+          <Card title={t("how.s3t")} desc={t("how.s3d")} />
+        </div>
 
-  {/* Micro: guía rápida de gestos */}
-  <div className="mt-8">
-    <div className="text-sm font-semibold text-white/70">{t("how.cheatsheetTitle")}</div>
+        {/* Micro: guía rápida de gestos */}
+        <div className="mt-8">
+          <div className="text-sm font-semibold text-white/70">{t("how.cheatsheetTitle")}</div>
 
-    <div className="mt-3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-      <GestureCard icon="❤️" title={t("gestures.like")} desc={t("gestures.likeDesc")} />
-      <GestureCard icon="⬅️" title={t("gestures.back")} desc={t("gestures.backDesc")} />
-      <GestureCard icon="↔️" title={t("gestures.swipe")} desc={t("gestures.swipeDesc")} />
-      <GestureCard icon="⏯️" title={t("gestures.pause")} desc={t("gestures.pauseDesc")} />
-      <GestureCard icon="🔒" title={t("gestures.lock")} desc={t("gestures.lockDesc")} />
-      <GestureCard icon="🔊" title={t("gestures.volume")} desc={t("gestures.volumeDesc")} />
-    </div>
-  </div>
-</section>
-
+          <div className="mt-3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <GestureCard icon="❤️" title={t("gestures.like")} desc={t("gestures.likeDesc")} />
+            <GestureCard icon="⬅️" title={t("gestures.back")} desc={t("gestures.backDesc")} />
+            <GestureCard icon="↔️" title={t("gestures.swipe")} desc={t("gestures.swipeDesc")} />
+            <GestureCard icon="⏯️" title={t("gestures.pause")} desc={t("gestures.pauseDesc")} />
+            <GestureCard icon="🔒" title={t("gestures.lock")} desc={t("gestures.lockDesc")} />
+            <GestureCard icon="🔊" title={t("gestures.volume")} desc={t("gestures.volumeDesc")} />
+          </div>
+        </div>
+      </section>
 
       {/* DEMO (Home section) */}
-{/* DEMO (Home section) */}
-<section id="demo" className="mt-16 md:mt-24">
-  <SectionTitle icon={<Video className="h-5 w-5 text-cyan-300" />} title={t("demo.title")} />
-  <p className="mt-3 text-sm text-white/60">{t("demo.hint")}</p>
+      <section id="demo" className="mt-16 md:mt-24">
+        <SectionTitle icon={<Video className="h-5 w-5 text-cyan-300" />} title={t("demo.title")} />
+        <p className="mt-3 text-sm text-white/60">{t("demo.hint")}</p>
 
-  <div className="mt-6 rounded-3xl overflow-hidden ring-1 ring-white/10 bg-white/5">
-    <div className="p-4 md:p-6 flex justify-center">
-      <div className="w-full max-w-[420px] aspect-[9/16] rounded-2xl overflow-hidden bg-black/40 ring-1 ring-white/10">
-    <video
-  className="w-full h-full object-contain"
-  src="/airtap_demo_pip.mp4"
-  autoPlay
-  muted
-  loop
-  playsInline
-  preload="metadata"
-  controls
-/>
-
-      </div>
-    </div>
-  </div>
-</section>
-
+        <div className="mt-6 rounded-3xl overflow-hidden ring-1 ring-white/10 bg-white/5">
+          <div className="p-4 md:p-6 flex justify-center">
+            <div className="w-full max-w-[420px] aspect-[9/16] rounded-2xl overflow-hidden bg-black/40 ring-1 ring-white/10">
+              <video
+                className="w-full h-full object-contain"
+                src="/airtap_demo_pip.mp4"
+                autoPlay
+                muted
+                loop
+                playsInline
+                preload="metadata"
+                controls
+              />
+            </div>
+          </div>
+        </div>
+      </section>
 
       <footer className="mt-20 border-t border-white/10 pt-8 text-sm text-white/60">
-        {t("footer.rights", {year})}
+        {t("footer.rights", { year })}
       </footer>
     </div>
   );
 }
 
-function FeaturePill({icon, text}: {icon: React.ReactNode; text: string}) {
+function FeaturePill({ icon, text }: { icon: React.ReactNode; text: string }) {
   return (
     <div className="flex items-center gap-2 rounded-2xl bg-white/5 px-4 py-3 ring-1 ring-white/10">
       <span className="text-cyan-300">{icon}</span>
@@ -186,7 +222,7 @@ function FeaturePill({icon, text}: {icon: React.ReactNode; text: string}) {
   );
 }
 
-function SectionTitle({icon, title}: {icon: React.ReactNode; title: string}) {
+function SectionTitle({ icon, title }: { icon: React.ReactNode; title: string }) {
   return (
     <div className="flex items-center gap-3">
       <div className="h-10 w-10 rounded-2xl bg-cyan-400/15 ring-1 ring-cyan-300/25 flex items-center justify-center">
@@ -197,7 +233,7 @@ function SectionTitle({icon, title}: {icon: React.ReactNode; title: string}) {
   );
 }
 
-function Card({title, desc}: {title: string; desc: string}) {
+function Card({ title, desc }: { title: string; desc: string }) {
   return (
     <div className={classNames("rounded-3xl bg-white/5 p-6 ring-1 ring-white/10")}>
       <h3 className="text-lg font-semibold">{title}</h3>
@@ -205,6 +241,7 @@ function Card({title, desc}: {title: string; desc: string}) {
     </div>
   );
 }
+
 function GestureCard({ icon, title, desc }: { icon: string; title: string; desc: string }) {
   return (
     <div className="rounded-3xl bg-white/5 p-6 ring-1 ring-white/10">
@@ -218,4 +255,3 @@ function GestureCard({ icon, title, desc }: { icon: string; title: string; desc:
     </div>
   );
 }
-

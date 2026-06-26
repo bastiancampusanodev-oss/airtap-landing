@@ -1,12 +1,18 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
-import { useMemo } from "react";
+import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
 import { motion } from "framer-motion";
-import { ArrowRight, Sparkles, Globe, Video, DollarSign, Users } from "lucide-react";
-
+import {
+  ArrowRight,
+  Sparkles,
+  Globe,
+  Video,
+  DollarSign,
+  Users,
+  Accessibility,
+} from "lucide-react";
 function classNames(...xs: Array<string | false | undefined>) {
   return xs.filter(Boolean).join(" ");
 }
@@ -30,8 +36,7 @@ function GooglePlayIcon({ className = "h-4 w-4" }: { className?: string }) {
 export default function Page() {
   const t = useTranslations();
   const locale = useLocale();
-  const year = useMemo(() => new Date().getFullYear(), []);
-
+const year = new Date().getFullYear();
   return (
     <div className="pt-10 md:pt-14">
       {/* HERO */}
@@ -156,7 +161,44 @@ export default function Page() {
           </div>
         </div>
       </section>
+{/* Accessibility Program banner */}
+<section className="mt-14 rounded-3xl bg-cyan-400/10 p-6 md:p-8 ring-1 ring-cyan-300/25 overflow-hidden relative">
+  <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(34,211,238,0.18),transparent_35%),radial-gradient(circle_at_80%_40%,rgba(34,211,238,0.10),transparent_35%)]" />
 
+  <div className="relative grid grid-cols-1 md:grid-cols-[1fr_auto] gap-6 items-center">
+    <div className="flex gap-4">
+      <div className="h-12 w-12 shrink-0 rounded-2xl bg-cyan-400/15 ring-1 ring-cyan-300/30 flex items-center justify-center">
+        <Accessibility className="h-7 w-7 text-cyan-300" />
+      </div>
+
+      <div>
+        <p className="text-sm font-semibold text-cyan-200">
+          Accessibility Program
+        </p>
+
+        <h2 className="mt-2 text-2xl md:text-3xl font-semibold tracking-tight">
+          {locale === "es"
+            ? "AirTap gratis para quienes realmente lo necesitan."
+            : "Free AirTap for those who truly need it."}
+        </h2>
+
+        <p className="mt-3 max-w-2xl text-sm md:text-base text-white/70 leading-7">
+          {locale === "es"
+            ? "Nuestra tecnología está disponible de forma gratuita y sin restricciones para personas con discapacidad elegibles. La misión es entregar control manos libres a quienes más pueden beneficiarse de AirTap."
+            : "Our technology is available for free, with no restrictions, for eligible users with disabilities. The mission is to bring hands-free control to the people who can benefit from AirTap the most."}
+        </p>
+      </div>
+    </div>
+
+    <Link
+      href={`/${locale}/accessibility-program`}
+      className="inline-flex items-center justify-center gap-2 rounded-2xl bg-cyan-400 px-5 py-3 text-sm font-semibold text-black hover:brightness-110"
+    >
+      {locale === "es" ? "Conocer el programa" : "Learn more"}
+      <ArrowRight className="h-4 w-4" />
+    </Link>
+  </div>
+</section>
       {/* HOW (Home section) */}
       <section id="how" className="mt-16 md:mt-24">
         <SectionTitle icon={<Sparkles className="h-5 w-5 text-cyan-300" />} title={t("how.title")} />

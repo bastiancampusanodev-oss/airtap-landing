@@ -1,16 +1,24 @@
 "use client";
 
 import React, { useMemo, useState } from "react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { Mail, MessageCircle, ArrowRight } from "lucide-react";
 
-function SectionTitle({ icon, title }: { icon: React.ReactNode; title: string }) {
+function SectionTitle({
+  icon,
+  title,
+}: {
+  icon: React.ReactNode;
+  title: string;
+}) {
   return (
     <div className="flex items-center gap-3">
       <div className="h-11 w-11 rounded-2xl bg-cyan-400/15 ring-1 ring-cyan-300/25 flex items-center justify-center">
         {icon}
       </div>
-      <h1 className="text-3xl md:text-4xl font-semibold tracking-tight">{title}</h1>
+      <h1 className="text-3xl md:text-4xl font-semibold tracking-tight">
+        {title}
+      </h1>
     </div>
   );
 }
@@ -49,17 +57,21 @@ type Status = "idle" | "sending" | "sent" | "error";
 
 export default function ContactPage() {
   const t = useTranslations();
+  const locale = useLocale();
   const [status, setStatus] = useState<Status>("idle");
 
-  // ✅ Pon tu WhatsApp acá (sin +, solo dígitos). Ej: "56965351547"
-  const WHATSAPP_NUMBER = "";
+  const WHATSAPP_NUMBER = "56965351547";
 
   const whatsappHref = useMemo(() => {
-    if (!WHATSAPP_NUMBER) return "";
+    const whatsappPrefill =
+      locale === "es"
+        ? "Hola AirTap, me gustaría contactarlos."
+        : "Hi AirTap, I would like to contact you.";
+
     return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
-      t("contact.whatsappPrefill")
+      whatsappPrefill
     )}`;
-  }, [WHATSAPP_NUMBER, t]);
+  }, [locale]);
 
   return (
     <main className="relative mx-auto max-w-6xl px-6 pb-20 pt-12">
@@ -67,10 +79,6 @@ export default function ContactPage() {
         icon={<Mail className="h-6 w-6 text-cyan-300" />}
         title={t("contact.title")}
       />
-
-      <p className="mt-4 text-base md:text-lg text-white/70 max-w-3xl">
-        {t("contact.subtitleLong")}
-      </p>
 
       <div className="mt-10 grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Form card */}
@@ -114,6 +122,7 @@ export default function ContactPage() {
               required
               autoComplete="name"
             />
+
             <Field
               name="email"
               label={t("contact.email")}
@@ -133,7 +142,9 @@ export default function ContactPage() {
             </div>
 
             <label className="md:col-span-2 block">
-              <span className="text-sm text-white/75">{t("contact.message")}</span>
+              <span className="text-sm text-white/75">
+                {t("contact.message")}
+              </span>
               <textarea
                 className="mt-2 w-full min-h-[140px] rounded-2xl bg-black/40 px-4 py-3 text-base text-white ring-1 ring-white/10 focus:outline-none focus:ring-cyan-300/40"
                 name="message"
@@ -157,8 +168,11 @@ export default function ContactPage() {
           </button>
 
           {status === "sent" && (
-            <p className="mt-4 text-sm text-cyan-200">{t("contact.success")}</p>
+            <p className="mt-4 text-sm text-cyan-200">
+              {t("contact.success")}
+            </p>
           )}
+
           {status === "error" && (
             <p className="mt-4 text-sm text-red-300">{t("contact.error")}</p>
           )}
@@ -172,22 +186,22 @@ export default function ContactPage() {
             <div className="h-11 w-11 rounded-2xl bg-cyan-400/15 ring-1 ring-cyan-300/25 flex items-center justify-center">
               <MessageCircle className="h-6 w-6 text-cyan-300" />
             </div>
-            <h2 className="text-xl md:text-2xl font-semibold">{t("contact.quickTitle")}</h2>
+            <h2 className="text-xl md:text-2xl font-semibold">
+              {t("contact.quickTitle")}
+            </h2>
           </div>
 
           <p className="mt-3 text-white/70">{t("contact.quickDesc")}</p>
 
           <div className="mt-6 flex flex-wrap gap-3">
-            {!!WHATSAPP_NUMBER && (
-              <a
-                href={whatsappHref}
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex items-center gap-2 rounded-2xl bg-white/5 px-6 py-3 text-sm font-semibold text-white ring-1 ring-white/10 hover:bg-white/10"
-              >
-                {t("contact.whatsapp")} <ArrowRight className="h-4 w-4" />
-              </a>
-            )}
+            <a
+              href={whatsappHref}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-2 rounded-2xl bg-white/5 px-6 py-3 text-sm font-semibold text-white ring-1 ring-white/10 hover:bg-white/10"
+            >
+              WhatsApp <ArrowRight className="h-4 w-4" />
+            </a>
 
             <a
               href="mailto:admin@airtapapp.com"
@@ -199,9 +213,19 @@ export default function ContactPage() {
 
           <div className="mt-6 rounded-2xl bg-black/30 p-4 ring-1 ring-white/10">
             <p className="text-sm text-white/70">
-              <span className="text-white/85 font-semibold">admin@airtapapp.com</span>
+              <span className="text-white/85 font-semibold">
+                admin@airtapapp.com
+              </span>
               <br />
               {t("contact.emailHint")}
+            </p>
+          </div>
+
+          <div className="mt-4 rounded-2xl bg-black/30 p-4 ring-1 ring-white/10">
+            <p className="text-sm text-white/70">
+              <span className="text-white/85 font-semibold">WhatsApp</span>
+              <br />
+              +56 9 6535 1547
             </p>
           </div>
         </div>

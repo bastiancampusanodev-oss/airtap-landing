@@ -22,8 +22,10 @@ function Bullet({ children }: { children: React.ReactNode }) {
 
 export default function AccessibilityProgramPage() {
   const locale = useLocale();
-
   const isEs = locale === "es";
+
+  const playStoreUrl =
+    "https://play.google.com/store/apps/details?id=com.airtap.app";
 
   const copy = {
     title: isEs ? "Accessibility Program" : "Accessibility Program",
@@ -66,7 +68,9 @@ export default function AccessibilityProgramPage() {
     privacyText: isEs
       ? "El programa usará una validación mínima y respetuosa. Pediremos solo la información necesaria para confirmar elegibilidad y evitar abuso del beneficio."
       : "The program will use minimal and respectful verification. We will ask only for the information needed to confirm eligibility and prevent abuse of the benefit.",
-    cta: isEs ? "Solicitar acceso gratuito" : "Request free access",
+    cta: isEs
+      ? "Solicitar acceso gratuito desde la app"
+      : "Request free access through the app",
     contact: isEs ? "Contactar a AirTap" : "Contact AirTap",
   };
 
@@ -92,12 +96,14 @@ export default function AccessibilityProgramPage() {
           </p>
 
           <div className="mt-8 flex flex-col sm:flex-row gap-3">
-            <Link
-              href={`/${locale}/contact`}
+            <a
+              href={playStoreUrl}
+              target="_blank"
+              rel="noreferrer"
               className="inline-flex items-center justify-center gap-2 rounded-2xl bg-cyan-400 px-6 py-3 text-sm font-semibold text-black hover:brightness-110"
             >
               {copy.cta} <ArrowRight className="h-4 w-4" />
-            </Link>
+            </a>
 
             <Link
               href={`/${locale}/pricing`}
@@ -133,7 +139,9 @@ export default function AccessibilityProgramPage() {
           <div className="h-11 w-11 rounded-2xl bg-cyan-400/15 ring-1 ring-cyan-300/25 flex items-center justify-center">
             <Accessibility className="h-6 w-6 text-cyan-300" />
           </div>
+
           <h2 className="mt-5 text-xl font-semibold">{copy.whoTitle}</h2>
+
           <ul className="mt-5 space-y-3">
             {copy.whoBullets.map((b) => (
               <Bullet key={b}>{b}</Bullet>
@@ -145,7 +153,9 @@ export default function AccessibilityProgramPage() {
           <div className="h-11 w-11 rounded-2xl bg-cyan-400/15 ring-1 ring-cyan-300/25 flex items-center justify-center">
             <Sparkles className="h-6 w-6 text-cyan-300" />
           </div>
+
           <h2 className="mt-5 text-xl font-semibold">{copy.includedTitle}</h2>
+
           <ul className="mt-5 space-y-3">
             {copy.includedBullets.map((b) => (
               <Bullet key={b}>{b}</Bullet>
@@ -157,7 +167,9 @@ export default function AccessibilityProgramPage() {
           <div className="h-11 w-11 rounded-2xl bg-cyan-400/15 ring-1 ring-cyan-300/25 flex items-center justify-center">
             <ShieldCheck className="h-6 w-6 text-cyan-300" />
           </div>
+
           <h2 className="mt-5 text-xl font-semibold">{copy.privacyTitle}</h2>
+
           <p className="mt-5 text-sm text-white/70 leading-7">
             {copy.privacyText}
           </p>

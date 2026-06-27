@@ -28,7 +28,7 @@ export default function AccessibilityProgramPage() {
     "https://play.google.com/store/apps/details?id=com.airtap.app";
 
   const copy = {
-    title: isEs ? "Accessibility Program" : "Accessibility Program",
+    title: "Accessibility Program",
     subtitle: isEs
       ? "Si tienes una discapacidad que dificulta usar tu teléfono con las manos, puedes usar AirTap gratis y sin restricciones."
       : "If you have a disability that makes it difficult to use your phone with your hands, you can use AirTap for free with no restrictions.",
@@ -66,8 +66,13 @@ export default function AccessibilityProgramPage() {
         ],
     privacyTitle: isEs ? "Privacidad y validación" : "Privacy and verification",
     privacyText: isEs
-      ? "El programa usará una validación mínima y respetuosa. Pediremos solo la información necesaria para confirmar elegibilidad y evitar abuso del beneficio."
-      : "The program will use minimal and respectful verification. We will ask only for the information needed to confirm eligibility and prevent abuse of the benefit.",
+      ? "El programa usa una validación mínima y respetuosa. Pedimos solo la información necesaria para confirmar elegibilidad y evitar abuso del beneficio."
+      : "The program uses minimal and respectful verification. We ask only for the information needed to confirm eligibility and prevent abuse of the benefit.",
+    privacyNoteTitle: isEs ? "Nota de privacidad" : "Privacy note",
+    privacyNoteText: isEs
+      ? "AirTap no almacena la imagen de tu credencial. La imagen se transmite de forma segura solo para validación asistida por IA. Guardamos metadatos limitados y hashes para prevenir abuso y administrar el acceso gratuito."
+      : "AirTap does not store your credential image. The image is transmitted securely only for AI-assisted eligibility validation. We store limited metadata and hashes to prevent abuse and manage free access.",
+    privacyLink: isEs ? "Leer política de privacidad" : "Read privacy policy",
     cta: isEs
       ? "Solicitar acceso gratuito desde la app"
       : "Request free access through the app",
@@ -173,6 +178,24 @@ export default function AccessibilityProgramPage() {
           <p className="mt-5 text-sm text-white/70 leading-7">
             {copy.privacyText}
           </p>
+
+          <div className="mt-6 rounded-2xl bg-cyan-400/10 p-5 ring-1 ring-cyan-300/20">
+            <p className="text-sm font-semibold text-cyan-200">
+              {copy.privacyNoteTitle}
+            </p>
+
+            <p className="mt-2 text-sm leading-7 text-white/70">
+              {copy.privacyNoteText}
+            </p>
+
+            <Link
+              href={`/${locale}/privacy`}
+              className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-cyan-300 hover:text-cyan-200"
+            >
+              {copy.privacyLink}
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
 
           <Link
             href={`/${locale}/contact`}

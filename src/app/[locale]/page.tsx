@@ -248,9 +248,25 @@ const year = new Date().getFullYear();
         </div>
       </section>
 
-      <footer className="mt-20 border-t border-white/10 pt-8 text-sm text-white/60">
-        {t("footer.rights", { year })}
-      </footer>
+      <footer className="mt-20 border-t border-white/10 pt-8 pb-10 text-sm text-white/60">
+  <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+    <p>{t("footer.rights", { year })}</p>
+
+    <div className="flex flex-wrap gap-4">
+      <Link href={`/${locale}/privacy`} className="hover:text-white">
+        {locale === "es" ? "Política de privacidad" : "Privacy Policy"}
+      </Link>
+
+      <Link href={`/${locale}/accessibility-program`} className="hover:text-white">
+        {locale === "es" ? "Programa de Accesibilidad" : "Accessibility Program"}
+      </Link>
+
+      <Link href={`/${locale}/contact`} className="hover:text-white">
+        {locale === "es" ? "Contacto" : "Contact"}
+      </Link>
+    </div>
+  </div>
+</footer>
     </div>
   );
 }
